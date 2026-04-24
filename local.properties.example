@@ -1,0 +1,21 @@
+# This file contains API keys and other sensitive information
+# Copy this file to local.properties and fill in your actual values
+# DO NOT commit the actual local.properties file to version control
+
+# Google Maps API Key
+# Get this from: https://console.cloud.google.com/
+# 1. Create project
+# 2. Enable Maps SDK for Android
+# 3. Create API Key
+# 4. Restrict key by package name and SHA-1 fingerprint
+MAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY_HERE
+
+# WeatherAPI.com Key (optional backup API)
+# Get this from: https://www.weatherapi.com/
+WEATHERAPI_KEY=YOUR_WEATHERAPI_KEY_HERE
+
+# Signing configuration for release builds
+KEYSTORE_PATH=keystore.jks
+KEY_ALIAS=your-key-alias
+KEYSTORE_PASSWORD=your-keystore-password
+KEY_PASSWORD=your-key-password
