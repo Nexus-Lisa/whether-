@@ -65,13 +65,21 @@ fun ForecastScreen(
 
 @Composable
 fun ForecastContent(weather: com.weatherapp.domain.model.Weather) {
+    val safeItemCount = minOf(
+        weather.dailyTime.size,
+        weather.dailyMaxTemp.size,
+        weather.dailyMinTemp.size,
+        weather.dailyWeatherCode.size,
+        weather.dailyPrecipitation.size
+    )
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(weather.dailyTime.size) { index ->
+        items(safeItemCount) { index ->
             DailyForecastItem(
                 date = weather.dailyTime[index],
                 maxTemp = weather.dailyMaxTemp[index].toInt(),

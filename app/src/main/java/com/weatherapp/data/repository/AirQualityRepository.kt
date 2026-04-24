@@ -16,11 +16,11 @@ class AirQualityRepository @Inject constructor(
         val response = api.getAirQuality(lat, lon)
         val index = 0 // Current hour
         return AirQuality(
-            aqi = response.hourly.usAqi[index],
-            pm10 = response.hourly.pm10[index],
-            pm25 = response.hourly.pm25[index],
-            o3 = response.hourly.o3[index],
-            no2 = response.hourly.no2[index],
+            aqi = response.hourly.usAqi.getOrNull(index) ?: 0,
+            pm10 = response.hourly.pm10.getOrNull(index) ?: 0.0,
+            pm25 = response.hourly.pm25.getOrNull(index) ?: 0.0,
+            o3 = response.hourly.o3.getOrNull(index) ?: 0.0,
+            no2 = response.hourly.no2.getOrNull(index) ?: 0.0,
             timestamp = System.currentTimeMillis()
         )
     }

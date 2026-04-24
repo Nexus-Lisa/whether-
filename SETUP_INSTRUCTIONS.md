@@ -42,8 +42,8 @@ After pushing, go to your repository on GitHub and add these secrets:
 2. Add the following secrets:
 
 ### Required Secrets:
-- `GOOGLE_MAPS_API_KEY`: `AIzaSyB1dW6a_YTzpDa9j-WX7j99FpkNZUIQ9qk`
-- `WEATHERAPI_KEY`: `592086b1dc174b309e491141262104`
+- `MAPS_API_KEY`: your Google Maps API key
+- `WEATHERAPI_KEY`: your WeatherAPI key
 
 ### Optional (for APK signing):
 - `KEYSTORE_BASE64`: (generate keystore first, then convert to base64)
@@ -80,8 +80,8 @@ certutil -encode my-release-key.jks keystore_base64.txt
 
 ## API Keys Configuration:
 
-- WeatherAPI.com key is already in the code
-- Google Maps key is in local.properties (protected by .gitignore)
-- All keys are properly secured
+- Keys must not be hardcoded in source files
+- Store keys in `local.properties` for local builds
+- Store keys in GitHub repository secrets for CI builds
 
 After completing these steps, your project will be live on GitHub and GitHub Actions will automatically build APKs when you push to main branch.

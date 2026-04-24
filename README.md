@@ -134,7 +134,7 @@ Go to your repository's **Settings** > **Secrets and variables** > **Actions** a
 - `KEY_ALIAS`: Your keystore alias (e.g., "my-key-alias")
 - `KEYSTORE_PASSWORD`: Your keystore password
 - `KEY_PASSWORD`: Your key password (usually same as keystore password)
-- `GOOGLE_MAPS_API_KEY`: Your Google Maps API key
+- `MAPS_API_KEY`: Your Google Maps API key
 - `WEATHERAPI_KEY`: Your WeatherAPI key (optional)
 
 ### 4. Enable GitHub Actions

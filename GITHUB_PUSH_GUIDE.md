@@ -62,13 +62,13 @@ After pushing, go to your repository and add secrets:
 
 ### Required Secrets:
 ```
-Name: GOOGLE_MAPS_API_KEY
-Value: AIzaSyB1dW6a_YTzpDa9j-WX7j99FpkNZUIQ9qk
+Name: MAPS_API_KEY
+Value: [your Google Maps API key]
 ```
 
 ```
 Name: WEATHERAPI_KEY  
-Value: 592086b1dc174b309e491141262104
+Value: [your WeatherAPI key]
 ```
 
 ### Optional (for APK signing):
@@ -140,8 +140,8 @@ WeatherApp/
 
 ## API Keys Status
 
-- WeatherAPI.com: Already configured in code
-- Google Maps: Configured in local.properties (protected)
-- All keys are properly secured and not exposed in Git
+- WeatherAPI.com: Loaded from `WEATHERAPI_KEY` (local.properties or GitHub Secrets)
+- Google Maps: Loaded from `MAPS_API_KEY` (local.properties or GitHub Secrets)
+- No real keys should be committed to Git
 
 After completing these steps, your weather app will be live on GitHub with automatic CI/CD!

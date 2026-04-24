@@ -439,6 +439,8 @@ fun HourlyForecastPreview(
     hourlyTemperature: List<Double>,
     hourlyPrecipitation: List<Int>
 ) {
+    val safeItemCount = minOf(hourlyTime.size, hourlyTemperature.size, hourlyPrecipitation.size, 12)
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -459,7 +461,7 @@ fun HourlyForecastPreview(
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                items(hourlyTime.indices.take(12)) { index ->
+                items(safeItemCount) { index ->
                     HourlyItem(
                         time = hourlyTime[index].substringAfter("T").substringBefore(":"),
                         temperature = hourlyTemperature[index].toInt(),
