@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.compose.GoogleMap
@@ -32,6 +32,13 @@ fun WeatherMapScreen(
     val weatherState by weatherViewModel.weatherState.collectAsState()
     var selectedLayer by remember { mutableStateOf("precipitation") }
     val cameraPositionState = rememberCameraPositionState()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val hasLocationPermission = remember {
+        ContextCompat.checkSelfPermission(
+            context,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+        ) == android.content.pm.PackageManager.PERMISSION_GRANTED
+    }
 
     LaunchedEffect(weatherState) {
         if (weatherState is com.weatherapp.presentation.viewmodel.WeatherState.Success) {
@@ -71,7 +78,7 @@ fun WeatherMapScreen(
                 cameraPositionState = cameraPositionState,
                 properties = MapProperties(
                     mapType = MapType.NORMAL,
-                    isMyLocationEnabled = true
+                    isMyLocationEnabled = hasLocationPermission
                 ),
                 onMapClick = { latLng ->
                     // Handle map click to show weather at that location

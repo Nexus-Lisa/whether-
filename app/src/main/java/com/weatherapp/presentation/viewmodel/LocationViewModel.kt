@@ -2,7 +2,6 @@ package com.weatherapp.presentation.viewmodel
 
 import android.Manifest
 import android.app.Application
-import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
@@ -25,7 +24,9 @@ class LocationViewModel @Inject constructor(
     private val application: Application
 ) : ViewModel() {
 
-    private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
+    private val fusedLocationClient by lazy {
+        runCatching { LocationServices.getFusedLocationProviderClient(application) }.getOrNull()
+    }
 
     private val _locationState = MutableStateFlow<LocationState>(LocationState.Idle)
     val locationState: StateFlow<LocationState> = _locationState.asStateFlow()
@@ -48,7 +49,13 @@ class LocationViewModel @Inject constructor(
     private fun requestLocation() {
         viewModelScope.launch {
             try {
-                fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                val client = fusedLocationClient
+                if (client == null) {
+                    _locationState.value = LocationState.Error("Location services unavailable")
+                    return@launch
+                }
+
+                client.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
                         val city = City(
                             name = "Current Location",

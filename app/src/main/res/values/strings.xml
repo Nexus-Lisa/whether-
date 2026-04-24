@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weather App</string>
+    <string name="app_name">weather</string>
     <string name="current_weather">Current Weather</string>
     <string name="hourly_forecast">Hourly Forecast</string>
     <string name="daily_forecast">10-Day Forecast</string>
